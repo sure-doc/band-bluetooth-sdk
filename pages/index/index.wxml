@@ -1,0 +1,36 @@
+<!-- index.wxml -->
+<view class="container">
+  <view>
+    扫描设备
+    <switch checked="{{scanChecked}}" bindchange="switchScan" />
+  </view>
+  <!-- 已连接设备列表 -->
+  <view class="device-container">
+    已经连接设备：
+    <view class="device-item-container" wx:for="{{connectedDevices}}" wx:key="mac">
+      <view>mac: {{item.mac}}</view>
+    </view>
+  </view>
+  <!-- 扫描设备列表 -->
+  <view class="device-container">
+    扫描设备：
+    <view class="device-item-container" wx:for="{{scanDevices}}" wx:key="mac">
+      <view>mac: {{item.mac}}</view>
+      <view>name: {{item.name}}</view>
+      <view>localName: {{item.localName}}</view>
+      <view>RSSI: {{item.RSSI}}</view>
+      <view>
+        <!-- 未连接 -->
+        <button wx:if="{{!item.state.connecting && !item.state.connected}}" size="mini" data-device="{{item}}" bindtap="connectDevice">
+          连接
+        </button>
+        <!-- 连接中 -->
+        <button wx:if="{{item.state.connecting && !item.state.connected}}" size="mini">
+          连接中...
+        </button>
+        <!-- 已连接 -->
+        <button wx:if="{{!item.state.connecting && item.state.connected}}" size="mini">已连接</button>
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,11 @@
+{
+  "name": "band-bluetooth-sdk-demo",
+  "version": "1.0.0",
+  "description": "band-bluetooth-sdk demo",
+  "main": "app.js",
+  "author": "suredoc",
+  "license": "ISC",
+  "dependencies": {
+    "band-bluetooth-sdk": "0.0.1-alpha.4"
+  }
+}

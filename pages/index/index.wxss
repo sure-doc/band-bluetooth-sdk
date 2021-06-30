@@ -1,0 +1,14 @@
+/**index.wxss**/
+.container {
+  padding: 12px;
+}
+
+.device-container {
+  padding: 12px 0;
+}
+
+.device-item-container {
+  border: 1px solid #666;
+  padding: 8px;
+  margin-bottom: 8px;
+}
