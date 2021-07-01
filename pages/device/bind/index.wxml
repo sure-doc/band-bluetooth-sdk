@@ -1,0 +1,13 @@
+<!-- index.wxml -->
+<view class="container">
+  <!-- 状态 -->
+  <view>{{state}}</view>
+  <!-- 绑定失败 -->
+  <view wx:if="{{error}}">
+    <view>绑定失败</view>
+    <view>code: {{error.code}}</view>
+    <view>msg: {{error.msg}}</view>
+  </view>
+  <!-- 绑定成功 -->
+  <view wx:if="{{success}}">绑定成功</view>
+</view>

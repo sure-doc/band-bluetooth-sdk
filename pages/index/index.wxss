@@ -12,3 +12,7 @@
   padding: 8px;
   margin-bottom: 8px;
 }
+
+.button {
+  margin-right: 12px;
+}

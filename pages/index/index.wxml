@@ -9,6 +9,14 @@
     已经连接设备：
     <view class="device-item-container" wx:for="{{connectedDevices}}" wx:key="mac">
       <view>mac: {{item.mac}}</view>
+      <view>
+        <button class="button" size="mini" data-mac="{{item.mac}}" bindtap="disconnectDevice">
+          断开连接
+        </button>
+        <button class="button" size="mini" data-mac="{{item.mac}}" bindtap="navigateDeviceDetail">
+          更多
+        </button>
+      </view>
     </view>
   </view>
   <!-- 扫描设备列表 -->
@@ -25,11 +33,13 @@
           连接
         </button>
         <!-- 连接中 -->
-        <button wx:if="{{item.state.connecting && !item.state.connected}}" size="mini">
-          连接中...
+        <button wx:if="{{item.state.connecting && !item.state.connected}}" loading="{{true}}" size="mini" data-mac="{{item.mac}}" disabled="{{true}}">
+          连接中
         </button>
         <!-- 已连接 -->
-        <button wx:if="{{!item.state.connecting && item.state.connected}}" size="mini">已连接</button>
+        <button wx:if="{{!item.state.connecting && item.state.connected}}" size="mini" data-mac="{{item.mac}}" bindtap="disconnectDevice">
+          断开连接
+        </button>
       </view>
     </view>
   </view>

@@ -1,0 +1,7 @@
+<!-- index.wxml -->
+<view class="container">
+  <view>
+    <button class="button" bindtap="bindDevice">请求绑定</button>
+    <button class="button" bindtap="startSync">启动同步</button>
+  </view>
+</view>

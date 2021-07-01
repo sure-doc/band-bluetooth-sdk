@@ -1,13 +1,24 @@
-- [初始化-init](#初始化-init)
-- [监听初始化完成-onInitialized](#监听初始化完成-oninitialized)
-- [扫描设备-scanDevice](#扫描设备-scandevice)
-- [连接设备-connectDevice](#连接设备-connectdevice)
-- [监听设备连接状态变更-onConnectionStateChange](#监听设备连接状态变更-onconnectionstatechange)
+- 初始化
+  - [初始化-init](#初始化-init)
+  - [监听初始化完成-onInitialized](#监听初始化完成-onInitialized)
+- 扫描设备
+  - [扫描设备-scanDevice](#扫描设备-scandevice)
+- 连接
+  - [连接设备-connectDevice](#连接设备-connectDevice)
+  - [断开连接-disconnectDevice](#断开连接-disconnectDevice)
+  - [监听设备连接状态变更-onConnectionStateChange](#监听设备连接状态变更-onConnectionStateChange)
+- 绑定
+  - [请求绑定-bindDevice](#请求绑定-bindDevice)
+- 数据
+  - [开启数据同步-startDataSync](#开启数据同步-startDataSync)
+  - [监听数据同步-onUploadData](#监听数据同步-onUploadData)
+
+---
 
 ### 初始化-init
 
 ```js
-const { init } from 'band-bluetooth-sdk';
+import { init } from 'band-bluetooth-sdk';
 
 init({
   // 可选
@@ -23,19 +34,18 @@ init({
 ### 监听初始化完成-onInitialized
 
 ```js
-const { onInitialized } from 'band-bluetooth-sdk';
+import { onInitialized } from 'band-bluetooth-sdk';
 
 // 如果已初始化则立即执行
 onInitialized(() => {
-  console.info('initialized')
+  console.info('initialized');
 });
-
 ```
 
 ### 扫描设备-scanDevice
 
 ```js
-const { scanDevice } from 'band-bluetooth-sdk';
+import { scanDevice } from 'band-bluetooth-sdk';
 
 const stopScanDevice = scanDevice({
   /** 搜索指定 mac，默认空，扫描所有设备 */
@@ -57,7 +67,7 @@ stopScanDevice();
 ### 连接设备-connectDevice
 
 ```js
-const { connectDevice } from 'band-bluetooth-sdk';
+import { connectDevice } from 'band-bluetooth-sdk';
 
 connectDevice({
   /** 搜索指定 mac，默认空，扫描所有设备 */
@@ -68,10 +78,21 @@ connectDevice({
 
 ```
 
-### 监听设备连接状态变更-onConnectionStateChange
+### 断开连接-disconnectDevice
 
 ```js
-const { onConnectionStateChange } from 'band-bluetooth-sdk';
+import { disconnectDevice } from 'band-bluetooth-sdk';
+
+disconnectDevice({
+  /** 设备 mac */
+  mac: 'xxxx',
+});
+```
+
+### 监听设备连接状态变更-onConnectionStateChange
+
+```ts
+import { onConnectionStateChange } from 'band-bluetooth-sdk';
 
 onConnectionStateChange({
   /** 监听指定 mac 设备变更，可选 */
@@ -87,4 +108,144 @@ onConnectionStateChange({
   };
 });
 
+```
+
+---
+
+### 请求绑定-bindDevice
+
+```ts
+import { bindDevice } from 'band-bluetooth-sdk';
+
+try {
+  const resp = await bindDevice({
+    mac: '',
+    // 监听状态变更
+    onStateChange: ({ state }) => {
+      console.info('onStateChange', state);
+    },
+    // 确认绑定，返回绑定结果给手环
+    onConfirmBind: async () => {
+      // 请求保存
+
+      // 如果失败则返回：
+      // return {
+      //   success: false,
+      //   errorMsg: '绑定失败了',
+      // };
+
+      return {
+        success: true,
+      };
+    },
+  });
+
+  console.info('绑定成功', resp); // { state: 'success' }
+} catch (error) {
+  const code = error.code;
+  const errorMessage = error.message;
+  console.info('绑定失败', code, errorMessage);
+}
+
+// ---- bindDevice Error
+export enum ErrorCode {
+  /** 未知错误 */
+  Unknown = 1,
+  /** 找不到设备 */
+  NotFoundDevice = 2,
+  /** 设备未连接 */
+  NotConnected = 3,
+  /** 用户拒绝 */
+  UserDeny = 4,
+  /** 设备拒绝绑定，正在充电中 */
+  DeviceCharging = 5,
+  /** 设备拒绝绑定，已被其他用户绑定 */
+  DeviceAlreadyBind = 6,
+  /** onConfirmBind 发生异常 */
+  OnConfirmBindError = 7,
+  /** onConfirmBind 函数返回结果中 success 不为 true */
+  OnConfirmBindResultNotSuccess = 8,
+}
+```
+
+### 开启数据同步-startDataSync
+
+```js
+import { startDataSync } from 'band-bluetooth-sdk';
+
+onConnectionStateChange({
+  /** 设备 mac */
+  mac: 'xxxx',
+  /**
+   * 用户信息，可选
+   */
+  userInfo: {
+    /** 体重，可选 */
+    weight: 60,
+    /** 身高，可选 */
+    height: 170,
+    /** 出生日期(时间戳 ms)，可选 */
+    birthday: 11111111111,
+    /** 年龄；不传时，如果传入出生日期，则根据出生日期计算 */
+    age: 16,
+    /** 性别, 男=1，女=0 */
+    gender: 1,
+    /** 用户昵称，可选 */
+    nickName: 'myName',
+  },
+});
+```
+
+### 监听数据同步-onUploadData
+
+```ts
+import { onUploadData } from 'band-bluetooth-sdk';
+
+onUploadData({
+  onUpload: ({ mac, data }) => {
+    if (data.type === 'normal') {
+      console.info(data);
+    }
+
+    if (data.type === 'file') {
+      console.info(data);
+    }
+  },
+});
+
+// 文件类型
+interface NormalData {
+  /** 类型 */
+  type: 'normal';
+  /** 时间戳 */
+  ts: number;
+  /** 类别 id */
+  categoryId: number;
+  /** 命令 id */
+  commandId: number;
+  /** 数据 **/
+  data: any;
+  /** 是否请求 */
+  isReq: boolean;
+  /** 是否响应 */
+  isRsp: boolean;
+  /** 序号 */
+  seq: number;
+}
+
+// 文件类型
+interface FileData {
+  /** 类型 */
+  type: 'normal';
+  /** 时间戳 */
+  ts: number;
+  /** 文件名称 */
+  fileName: string;
+  /** 文件类型 */
+  fileType: FileType;
+  /** 文件头，不一定有 */
+  fileHeader?: FileHeader;
+  /** 文件列表 */
+  fileList: any[];
+}
 ```

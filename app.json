@@ -1,6 +1,8 @@
 {
   "pages":[
     "pages/index/index",
+    "pages/device/index",
+    "pages/device/bind/index",
     "pages/logs/logs"
   ],
   "window":{

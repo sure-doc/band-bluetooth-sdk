@@ -1,0 +1,8 @@
+/**index.wxss**/
+.container {
+  padding: 12px;
+}
+
+.button {
+  margin-bottom: 12px;
+}

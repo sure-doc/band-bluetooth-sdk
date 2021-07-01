@@ -24,6 +24,7 @@ Page({
     bandBluetoothSdk.onInitialized(() => {
       console.info('初始化完成');
       this._listenConnectionStateChange();
+      this._listenDataUpload();
     });
   },
 
@@ -50,15 +51,25 @@ Page({
   /** 连接设备 */
   connectDevice(event) {
     const { device } = event.currentTarget.dataset;
-    console.info('连接设备', device);
+    console.info(`连接设备 mac=${device.mac}`);
     bandBluetoothSdk.connectDevice({
       mac: device.mac,
     });
   },
 
-  /** 连接设备 */
+  /** 断开连接 */
   disconnectDevice(event) {
-    console.info('断开连接设备', device);
+    const { mac } = event.currentTarget.dataset;
+    console.info(`断开连接设备 mac=${mac}`);
+    bandBluetoothSdk.disconnectDevice({ mac });
+  },
+
+  /** 跳转到设备详情 */
+  navigateDeviceDetail(event) {
+    const { mac } = event.currentTarget.dataset;
+    wx.navigateTo({
+      url: `/pages/device/index?mac=${mac}`,
+    });
   },
 
   /** 监听连接状态变更 */
@@ -66,9 +77,28 @@ Page({
     bandBluetoothSdk.onConnectionStateChange({
       onChange: (result) => {
         console.info(
-          `连接状态变更，mac=${result.mac}, state=${JSON.stringify(result.state)}, prevState=${JSON.stringify(result.prevState)}`
+          `连接状态变更，mac=${result.mac}, state=${JSON.stringify(result.state)}, prevState=${JSON.stringify(
+            result.prevState,
+          )}`,
         );
-        this._setDeviceState(result);
+        this._setConnectionState(result);
+      },
+    });
+  },
+
+  /** 监听数据上传 */
+  _listenDataUpload() {
+    bandBluetoothSdk.onUploadData({
+      onUpload: ({ mac, data }) => {
+        if (data.type === 'normal') {
+          console.info(`监听到普通数据上传 mac=${mac} normalData=${JSON.stringify(data)}`);
+          return;
+        }
+
+        if (data.type === 'file') {
+          console.info(`监听到文件数据上传 mac=${mac} fileData=${JSON.stringify(data)}`);
+          return;
+        }
       },
     });
   },
@@ -84,7 +114,7 @@ Page({
   },
 
   /** 更新设备状态 */
-  _setDeviceState({ mac, state, prevState }) {
+  _setConnectionState({ mac, state, prevState }) {
     this._setData({
       _connectionStateMap: { ...this.data._connectionStateMap, [mac]: state },
     });
@@ -93,17 +123,18 @@ Page({
   _setData(changedData) {
     const nextData = { ...changedData };
 
-    const scanDevices = this._getScanDevices(changedData);
+    // scanDevices
+    const scanDevices = this._getNextScanDevices(changedData);
     if (scanDevices) nextData.scanDevices = scanDevices;
 
-    const connectedDevices = this._getConnectedDevices(changedData);
+    // connectedDevices
+    const connectedDevices = this._getNextConnectedDevices(changedData);
     if (connectedDevices) nextData.connectedDevices = connectedDevices;
 
-    console.info('nextData', nextData);
     this.setData(nextData);
   },
 
-  _getScanDevices(changedData) {
+  _getNextScanDevices(changedData) {
     if (!changedData._scanDeviceMap && !changedData._connectionStateMap) return;
 
     const { _scanDeviceMap, _connectionStateMap } = { ...this.data, ...changedData };
@@ -116,7 +147,7 @@ Page({
     });
   },
 
-  _getConnectedDevices(changedData) {
+  _getNextConnectedDevices(changedData) {
     if (!changedData._connectionStateMap) return;
 
     const { _connectionStateMap } = changedData;
