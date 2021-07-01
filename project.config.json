@@ -40,7 +40,7 @@
   "compileType": "miniprogram",
   "libVersion": "2.18.0",
   "appid": "wxf7a19a904fc09bfc",
-  "projectname": "miniprogram-1",
+  "projectname": "band-bluetooth-sdk",
   "debugOptions": {
     "hidedInDevtools": []
   },
