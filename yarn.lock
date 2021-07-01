@@ -2,7 +2,7 @@
 # yarn lockfile v1
 
 
-band-bluetooth-sdk@0.0.1-alpha.6:
-  version "0.0.1-alpha.6"
-  resolved "https://registry.yarnpkg.com/band-bluetooth-sdk/-/band-bluetooth-sdk-0.0.1-alpha.6.tgz#fd2e587a4006c4d327608eed6e2930a3ee7c43aa"
-  integrity sha512-eQrPK1PhrZYvqkQKft1BNPe1P/fQbzrU0HpXs0EqvR9qV/dDsc0NDyQ1n9ZEh5gfc970q1jI+3ReV0cNYZ3RYw==
+band-bluetooth-sdk@0.0.1-alpha.7:
+  version "0.0.1-alpha.7"
+  resolved "https://registry.yarnpkg.com/band-bluetooth-sdk/-/band-bluetooth-sdk-0.0.1-alpha.7.tgz#141c9fd69981c11dcae8bf6d313ecb53e936674f"
+  integrity sha512-cvqm2S8cPkAeMBMPHulIYQIB3XvCIy3263se5cJl6JeJWKV2aod4cSYF67REbpQshTxS118CAgeKtx8N8S1OIQ==
