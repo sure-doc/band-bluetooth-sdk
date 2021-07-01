@@ -3,20 +3,16 @@
   padding: 12px;
 }
 
-.button {
-  margin-bottom: 12px;
-}
-
-.device-list-container {
+.device-container {
   padding: 12px 0;
 }
 
-.device-item_container {
+.device-item-container {
   border: 1px solid #666;
   padding: 8px;
   margin-bottom: 8px;
 }
 
-.device-item_button {
+.button {
   margin-right: 12px;
 }

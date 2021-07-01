@@ -11,9 +11,12 @@
     - [监听设备连接状态变更-onConnectionStateChange](#监听设备连接状态变更-onConnectionStateChange)
   - 绑定
     - [请求绑定-bindDevice](#请求绑定-bindDevice)
+    - [连接并请求绑定-connectAndBindDevice](#连接并请求绑定-connectAndBindDevice)
   - 数据
     - [开启数据同步-startDataSync](#开启数据同步-startDataSync)
     - [监听数据同步-onUploadData](#监听数据同步-onUploadData)
+  - 其他
+    - [解析二维码-parseQrcode](#解析二维码-parseQrcode)
 
 ---
 
@@ -184,6 +187,17 @@ export enum ErrorCode {
 }
 ```
 
+### 连接并请求绑定-connectAndBindDevice
+
+```js
+import { connectAndBindDevice } from 'band-bluetooth-sdk';
+
+connectAndBindDevice({
+  mac: 'xxx',
+  // ...参数与 bindDevice 一致
+});
+```
+
 ### 开启数据同步-startDataSync
 
 ```js
@@ -264,4 +278,15 @@ interface FileData {
   /** 文件列表 */
   fileList: any[];
 }
+```
+
+### 解析二维码-parseQrcode
+
+```js
+import { parseQrcode } from 'band-bluetooth-sdk';
+
+const qrcode = '.....';
+const qrcodeInfo = parseQrcode(qrcode);
+
+console.info(qrcodeInfo); // { mac: '', sn: '' }
 ```

@@ -8,12 +8,26 @@ Page({
   },
 
   /** 初始化 */
-  async onLoad({ mac }) {
-    this.mac = mac;
-    console.info(`请求绑定 mac=${mac}`);
-    let resp;
+  async onLoad() {
+    let scanRes;
     try {
-      resp = await bandBluetoothSdk.bindDevice({
+      scanRes = await new Promise((resolve, reject) => {
+        wx.scanCode({
+          scanType: ['qrCode'],
+          success: resolve,
+          fail: reject,
+        });
+      });
+    } catch (error) {
+      wx.navigateBack();
+      return;
+    }
+    console.info('扫描结果', scanRes);
+    const { mac } = bandBluetoothSdk.parseQrcode(scanRes.result);
+
+    let result;
+    try {
+      result = await bandBluetoothSdk.connectAndBindDevice({
         mac,
         // 监听状态变更
         onStateChange: ({ state }) => {
@@ -50,5 +64,11 @@ Page({
     this.setData({
       success: true,
     });
+  },
+
+  _setData(changedData) {
+    const nextData = { ...changedData };
+
+    this.setData(nextData);
   },
 });

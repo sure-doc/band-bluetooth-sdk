@@ -1,44 +1,20 @@
 <!-- index.wxml -->
 <view class="container">
   <view>
-    扫描设备
-    <switch checked="{{scanChecked}}" bindchange="switchScan" />
+    <button class="button" bindtap="scanQrcodeBind">扫码绑定</button>
+    <button class="button" bindtap="scanDevice">扫描设备</button>
   </view>
   <!-- 已连接设备列表 -->
-  <view class="device-container">
+  <view class="device-list-container">
     已经连接设备：
-    <view class="device-item-container" wx:for="{{connectedDevices}}" wx:key="mac">
+    <view class="device-item_container" wx:for="{{connectedDevices}}" wx:key="mac">
       <view>mac: {{item.mac}}</view>
       <view>
-        <button class="button" size="mini" data-mac="{{item.mac}}" bindtap="disconnectDevice">
+        <button class="device-item_button" size="mini" data-mac="{{item.mac}}" bindtap="disconnectDevice">
           断开连接
         </button>
-        <button class="button" size="mini" data-mac="{{item.mac}}" bindtap="navigateDeviceDetail">
+        <button class="device-item_button" size="mini" data-mac="{{item.mac}}" bindtap="navigateDeviceDetail">
           更多
-        </button>
-      </view>
-    </view>
-  </view>
-  <!-- 扫描设备列表 -->
-  <view class="device-container">
-    扫描设备：
-    <view class="device-item-container" wx:for="{{scanDevices}}" wx:key="mac">
-      <view>mac: {{item.mac}}</view>
-      <view>name: {{item.name}}</view>
-      <view>localName: {{item.localName}}</view>
-      <view>RSSI: {{item.RSSI}}</view>
-      <view>
-        <!-- 未连接 -->
-        <button wx:if="{{!item.state.connecting && !item.state.connected}}" size="mini" data-device="{{item}}" bindtap="connectDevice">
-          连接
-        </button>
-        <!-- 连接中 -->
-        <button wx:if="{{item.state.connecting && !item.state.connected}}" loading="{{true}}" size="mini" data-mac="{{item.mac}}" disabled="{{true}}">
-          连接中
-        </button>
-        <!-- 已连接 -->
-        <button wx:if="{{!item.state.connecting && item.state.connected}}" size="mini" data-mac="{{item.mac}}" bindtap="disconnectDevice">
-          断开连接
         </button>
       </view>
     </view>

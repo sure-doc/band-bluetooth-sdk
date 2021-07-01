@@ -7,14 +7,8 @@ const InitConnectionState = {
 
 Page({
   data: {
-    /** 扫描开关 */
-    scanChecked: false,
-    /** 扫描的设备 */
-    scanDevices: [],
     /** 已连接设备 */
     connectedDevices: [],
-    /** 扫描的设备： { [mac]: scanDevice } */
-    _scanDeviceMap: {},
     /** 设备连接状态： { [mac]: { connecting: boolean, connected: boolean } } */
     _connectionStateMap: {},
   },
@@ -28,32 +22,17 @@ Page({
     });
   },
 
-  /** 切换扫描开关 */
-  switchScan(event) {
-    const checked = event.detail.value;
-    this._setData({ scanChecked: checked });
-
-    // 开始扫描
-    if (checked) {
-      this.stopScanDevice = bandBluetoothSdk.scanDevice({
-        onDeviceFound: (device) => {
-          console.info('扫描到设备', device);
-          this._setScanDevice(device);
-        },
-      });
-    }
-    // 停止扫描
-    else {
-      this.stopScanDevice?.();
-    }
+  /** 扫码绑定 */
+  scanQrcodeBind() {
+    wx.navigateTo({
+      url: '/pages/bind/scan-qrcode/index',
+    });
   },
 
-  /** 连接设备 */
-  connectDevice(event) {
-    const { device } = event.currentTarget.dataset;
-    console.info(`连接设备 mac=${device.mac}`);
-    bandBluetoothSdk.connectDevice({
-      mac: device.mac,
+  /** 扫描设备 */
+  scanDevice() {
+    wx.navigateTo({
+      url: '/pages/scan-device/index',
     });
   },
 
@@ -123,28 +102,11 @@ Page({
   _setData(changedData) {
     const nextData = { ...changedData };
 
-    // scanDevices
-    const scanDevices = this._getNextScanDevices(changedData);
-    if (scanDevices) nextData.scanDevices = scanDevices;
-
     // connectedDevices
     const connectedDevices = this._getNextConnectedDevices(changedData);
     if (connectedDevices) nextData.connectedDevices = connectedDevices;
 
     this.setData(nextData);
-  },
-
-  _getNextScanDevices(changedData) {
-    if (!changedData._scanDeviceMap && !changedData._connectionStateMap) return;
-
-    const { _scanDeviceMap, _connectionStateMap } = { ...this.data, ...changedData };
-
-    return Object.values(_scanDeviceMap).map((device) => {
-      return {
-        ...device,
-        state: _connectionStateMap[device.mac] ?? InitConnectionState,
-      };
-    });
   },
 
   _getNextConnectedDevices(changedData) {
