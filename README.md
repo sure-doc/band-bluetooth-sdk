@@ -1,19 +1,35 @@
-- 初始化
-  - [初始化-init](#初始化-init)
-  - [监听初始化完成-onInitialized](#监听初始化完成-onInitialized)
-- 扫描设备
-  - [扫描设备-scanDevice](#扫描设备-scandevice)
-- 连接
-  - [连接设备-connectDevice](#连接设备-connectDevice)
-  - [断开连接-disconnectDevice](#断开连接-disconnectDevice)
-  - [监听设备连接状态变更-onConnectionStateChange](#监听设备连接状态变更-onConnectionStateChange)
-- 绑定
-  - [请求绑定-bindDevice](#请求绑定-bindDevice)
-- 数据
-  - [开启数据同步-startDataSync](#开启数据同步-startDataSync)
-  - [监听数据同步-onUploadData](#监听数据同步-onUploadData)
+- 安装
+- Api
+  - 初始化
+    - [初始化-init](#初始化-init)
+    - [监听初始化完成-onInitialized](#监听初始化完成-onInitialized)
+  - 扫描设备
+    - [扫描设备-scanDevice](#扫描设备-scandevice)
+  - 连接
+    - [连接设备-connectDevice](#连接设备-connectDevice)
+    - [断开连接-disconnectDevice](#断开连接-disconnectDevice)
+    - [监听设备连接状态变更-onConnectionStateChange](#监听设备连接状态变更-onConnectionStateChange)
+  - 绑定
+    - [请求绑定-bindDevice](#请求绑定-bindDevice)
+  - 数据
+    - [开启数据同步-startDataSync](#开启数据同步-startDataSync)
+    - [监听数据同步-onUploadData](#监听数据同步-onUploadData)
 
 ---
+
+### 安装
+
+yarn:
+
+```bash
+yarn add band-bluetooth-sdk
+```
+
+npm:
+
+```bash
+npm install band-bluetooth-sdk
+```
 
 ### 初始化-init
 
