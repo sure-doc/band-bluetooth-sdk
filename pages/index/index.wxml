@@ -3,6 +3,8 @@
   <view>
     <button class="button" bindtap="scanQrcodeBind">扫码绑定</button>
     <button class="button" bindtap="scanDevice">扫描设备</button>
+    <button class="button" bindtap="LookScanDevice">查看扫描到的设备</button>
+    <button class="button" bindtap="LookConnectDevice">查看已连接设备</button>
   </view>
   <!-- 已连接设备列表 -->
   <view class="device-list-container">

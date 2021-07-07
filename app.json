@@ -5,7 +5,9 @@
     "pages/bind/scan-qrcode/index",
     "pages/device/index",
     "pages/device/bind/index",
-    "pages/logs/logs"
+    "pages/logs/logs",
+    "pages/device/connectDevices/index",
+    "pages/device/scanDevices/index"
   ],
   "window": {
     "backgroundTextStyle": "light",

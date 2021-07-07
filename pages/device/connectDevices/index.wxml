@@ -1,0 +1,11 @@
+<view class="connectDevices">
+
+  <view wx:for="{{connectedDevices}}" wx:key="item">
+    <view>
+      {{item}}
+    </view>
+      
+  </view>
+    
+</view>
+  

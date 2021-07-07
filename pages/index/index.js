@@ -21,7 +21,6 @@ Page({
       this._listenDataUpload();
     });
   },
-
   /** 扫码绑定 */
   scanQrcodeBind() {
     wx.navigateTo({
@@ -36,11 +35,26 @@ Page({
     });
   },
 
+  /** 查看当前已连接的设备 */
+  LookConnectDevice() {
+    wx.navigateTo({
+      url: '/pages/device/connectDevices/index',
+    });
+  },
+
+  /** 查看当前已扫描到的设备 */
+  LookScanDevice() {
+    wx.navigateTo({
+      url: '/pages/device/scanDevices/index',
+    });
+  },
+
   /** 断开连接 */
   disconnectDevice(event) {
     const { mac } = event.currentTarget.dataset;
     console.info(`断开连接设备 mac=${mac}`);
     bandBluetoothSdk.disconnectDevice({ mac });
+    bandBluetoothSdk.getConnectedDevices();
   },
 
   /** 跳转到设备详情 */
@@ -104,6 +118,7 @@ Page({
 
     // connectedDevices
     const connectedDevices = this._getNextConnectedDevices(changedData);
+    // console.log(connectedDevices);
     if (connectedDevices) nextData.connectedDevices = connectedDevices;
 
     this.setData(nextData);

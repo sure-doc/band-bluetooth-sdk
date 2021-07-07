@@ -5,10 +5,12 @@
     - [监听初始化完成-onInitialized](#监听初始化完成-onInitialized)
   - 扫描设备
     - [扫描设备-scanDevice](#扫描设备-scandevice)
+    - [获取扫描到的设备信息-getScanDevices](#获取扫描到的设备信息-getScanDevices)
   - 连接
     - [连接设备-connectDevice](#连接设备-connectDevice)
     - [断开连接-disconnectDevice](#断开连接-disconnectDevice)
     - [监听设备连接状态变更-onConnectionStateChange](#监听设备连接状态变更-onConnectionStateChange)
+    - [获取已连接设备信息-getConnectedDevices](#获取已连接设备信息-getConnectedDevices)
   - 绑定
     - [请求绑定-bindDevice](#请求绑定-bindDevice)
     - [连接并请求绑定-connectAndBindDevice](#连接并请求绑定-connectAndBindDevice)
@@ -83,6 +85,15 @@ const stopScanDevice = scanDevice({
 stopScanDevice();
 ```
 
+### 获取扫描到的设备信息-getScanDevices
+
+```js
+import { getScanDevices } from 'band-bluetooth-sdk';
+const getScanDevices = getScanDevices();
+
+console.info('getScanDevices', getScanDevices);
+```
+
 ### 连接设备-connectDevice
 
 ```js
@@ -95,6 +106,14 @@ connectDevice({
   timeout: 10 * 1000;
 });
 
+```
+
+### 获取已连接设备信息-getConnectedDevices
+
+```js
+import { getConnectedDevices } from 'band-bluetooth-sdk';
+const getConnectedDevices = getConnectedDevices();
+console.info('getConnectedDevices', getConnectedDevices);
 ```
 
 ### 断开连接-disconnectDevice

@@ -42,6 +42,8 @@ Page({
         onDeviceFound: (device) => {
           console.info('扫描到设备', device);
           this._setScanDevice(device);
+          //  获取已扫描到的设备信息
+          bandBluetoothSdk.getScanDevices();
         },
       });
     }
@@ -96,6 +98,7 @@ Page({
     this._setData({
       _connectionStateMap: { ...this.data._connectionStateMap, [mac]: state },
     });
+    bandBluetoothSdk.getConnectedDevices(mac);
   },
 
   _setData(changedData) {

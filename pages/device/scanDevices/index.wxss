@@ -1,0 +1,7 @@
+page {
+  padding: 20px;
+}
+.device_item {
+  margin: 10px;
+  border-bottom: 1px solid #000;
+}
