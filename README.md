@@ -11,6 +11,7 @@
     - [断开连接-disconnectDevice](#断开连接-disconnectDevice)
     - [监听设备连接状态变更-onConnectionStateChange](#监听设备连接状态变更-onConnectionStateChange)
     - [获取已连接设备信息-getConnectedDevices](#获取已连接设备信息-getConnectedDevices)
+    - [获取手机已连接设备信息-getMobileDeviceMac](#获取手机已连接设备信息-getMobileDeviceMac)
   - 绑定
     - [请求绑定-bindDevice](#请求绑定-bindDevice)
     - [连接并请求绑定-connectAndBindDevice](#连接并请求绑定-connectAndBindDevice)
@@ -114,6 +115,25 @@ connectDevice({
 import { getConnectedDevices } from 'band-bluetooth-sdk';
 const getConnectedDevices = getConnectedDevices();
 console.info('getConnectedDevices', getConnectedDevices);
+```
+
+### 断开连接-disconnectDevice
+
+```js
+import { disconnectDevice } from 'band-bluetooth-sdk';
+
+disconnectDevice({
+  /** 设备 mac */
+  mac: 'xxxx',
+});
+```
+
+### 获取手机已连接设备信息-getMobileDeviceMac
+
+```js
+import { getMobileDeviceMac } from 'band-bluetooth-sdk';
+const getMobileDeviceMac = await getConnectedDevices();
+console.info('getMobileDeviceMac', getMobileDeviceMac); // 安卓端需要手机触发连接后才可以获取，退出小程序后将会断开连接
 ```
 
 ### 断开连接-disconnectDevice

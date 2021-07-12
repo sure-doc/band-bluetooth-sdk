@@ -1,3 +1,15 @@
+## [2021.07.12]
+
+### Added
+
+- 获取手机当前已连接设备-getMobileDeviceMac
+
+### Changed
+
+- 更新 band-bluetooth-sdk 到 0.0.1-alpha.11
+
+---
+
 ## [2021.07.07]
 
 ### Added
