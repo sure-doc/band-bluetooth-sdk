@@ -1,0 +1,34 @@
+## [2021.07.07]
+
+### Added
+
+- 获取已连接设备信息-getConnectedDevices
+- 获取扫描到的设备信息-getScanDevices
+
+### Changed
+
+- 更新 band-bluetooth-sdk 到 0.0.1-alpha.10
+
+---
+
+## [2021.07.01]
+
+### Added
+
+- 新增扫码绑定示例
+
+### Changed
+
+- 更新 band-bluetooth-sdk 到 0.0.1-alpha.7
+
+---
+
+### Added 新添加的功能
+
+### Changed 对现有功能的变更
+
+### Removed 已经移除的功能
+
+### Fixed 对 bug 的修复
+
+### Improved 优化现有功能
