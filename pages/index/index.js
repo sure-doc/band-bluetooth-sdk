@@ -35,13 +35,17 @@ Page({
     });
   },
 
-  /** 查看当前已连接的设备 */
+  /** 查看本次连接的设备 */
   LookConnectDevice() {
     wx.navigateTo({
       url: '/pages/device/connectDevices/index',
     });
   },
-
+  LookMobileConnectDevice() {
+    wx.navigateTo({
+      url: '/pages/device/mobileConnectDevices/index',
+    });
+  },
   /** 查看当前已扫描到的设备 */
   LookScanDevice() {
     wx.navigateTo({

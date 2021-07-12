@@ -7,7 +7,8 @@
     "pages/device/bind/index",
     "pages/logs/logs",
     "pages/device/connectDevices/index",
-    "pages/device/scanDevices/index"
+    "pages/device/scanDevices/index",
+    "pages/device/mobileConnectDevices/index"
   ],
   "window": {
     "backgroundTextStyle": "light",

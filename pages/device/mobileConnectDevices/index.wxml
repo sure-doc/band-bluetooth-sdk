@@ -1,0 +1,11 @@
+<view class="connectDevices">
+
+  <view wx:for="{{mobileConnectedDevices}}" wx:key="item">
+    <view>
+      {{item.mac}}
+    </view>
+      
+  </view>
+    
+</view>
+  
