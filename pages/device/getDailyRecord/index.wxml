@@ -1,0 +1,10 @@
+<view>
+  <radio-group bindchange="dataTypeChange">
+    <label wx:for="{{dataTypeOptions}}" wx:key="value">
+      <view>
+        <radio value="{{item.value}}" checked="{{item.value === dataType}}">{{item.name}}</radio>
+      </view>
+    </label>
+  </radio-group>
+  <button bindtap="getData">获取数据</button>
+</view>

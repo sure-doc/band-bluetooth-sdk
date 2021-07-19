@@ -1,14 +1,15 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/logs/logs",
     "pages/scan-device/index",
     "pages/bind/scan-qrcode/index",
     "pages/device/index",
     "pages/device/bind/index",
-    "pages/logs/logs",
     "pages/device/connectDevices/index",
     "pages/device/scanDevices/index",
-    "pages/device/mobileConnectDevices/index"
+    "pages/device/mobileConnectDevices/index",
+    "pages/device/getDailyRecord/index"
   ],
   "window": {
     "backgroundTextStyle": "light",

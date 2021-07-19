@@ -183,4 +183,11 @@ Page({
       wx.showToast({ title: '设置血氧配置 失败', icon: 'error' });
     }
   },
+
+  /** 获取日常数据记录 */
+  getDailyRecordData() {
+    wx.navigateTo({
+      url: `getDailyRecord/index?mac=${this.mac}`,
+    });
+  },
 });

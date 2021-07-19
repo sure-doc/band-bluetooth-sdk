@@ -19,11 +19,14 @@
     - [开启数据同步-startDataSync](#开启数据同步-startDataSync)
     - [监听数据同步-onUploadData](#监听数据同步-onUploadData)
   - [发送请求-requestDevice](#发送请求-requestDevice)
+    - [发送请求-说明](#发送请求-说明)
+    - [发送请求-错误码](#发送请求-错误码)
     - [获取设备信息-requestType=GetDeviceInfo](#获取设备信息-requestType=GetDeviceInfo)
     - [获取心率配置-requestType=GetHrSetting](#设置心率配置-requestType=GetHrSetting)
     - [设置心率配置-requestType=SetHrSetting](#设置心率配置-requestType=SetHrSetting)
     - [获取血氧配置-requestType=GetBloodOxygenSetting](#设置心率配置-requestType=GetBloodOxygenSetting)
     - [设置血氧配置-requestType=SetBloodOxygenSetting](#设置心率配置-requestType=SetBloodOxygenSetting)
+    - [获取日常记录数据-requestType=GetDailyRecordData](#获取日常记录数据-requestType=GetDailyRecordData)
   - 其他
     - [解析二维码-parseQrcode](#解析二维码-parseQrcode)
 
@@ -327,7 +330,26 @@ interface FileData {
 
 ## 发送请求-requestDevice
 
+### 发送请求-说明
+
 `requestDevice` 需要在执行完 [startDataSync](#开启数据同步-startDataSync) 之后执行
+
+### 发送请求-错误码
+
+1000000 成功
+1000001 未知错误
+1000002 内存申请失败
+1000003 错误的参数
+1000004 不支持的命令
+1000005 正忙
+1000006 pb 解码错误
+1000007 pb 编码错误
+1000008 传输层错误
+1000009 未绑定状态，不支持改操作
+1000010 文件不存在
+1000011 当前状态不支持该指令
+1003001 手机未打开定位服务
+1003002 手机无定位权限
 
 ### 获取设备信息-requestType=GetDeviceInfo
 
@@ -444,6 +466,43 @@ interface BloodOxygenSetting {
   switch: boolean;
   /** 手环血氧周期检测间隔（单位s） */
   interval: number;
+}
+```
+
+### 获取日常记录数据-requestType=GetDailyRecordData
+
+```js
+import { requestDevice } from 'band-bluetooth-sdk';
+
+const resp = await bandBluetoothSdk.requestDevice({
+  mac: this.mac,
+  requestType: 'GetDailyRecordData',
+  data: {
+    // 暂时只支持获取近期记录（与上一次上传间隔时间内的记录）
+    recordType: 0,
+    // 查看下方类型 DataType
+    dataType: 0,
+  },
+});
+```
+
+```ts
+enum RecordType {
+  /** 近期记录（与上一次上传间隔时间内的心率记录） */
+  Recent = 0,
+}
+
+enum DataType {
+  /** 心率 */
+  Hr = 0,
+  /** 血氧 */
+  BloodOxygen = 1,
+  /** 睡眠 */
+  Sleep = 2,
+  /** 日常活动 */
+  DailyActivity = 3,
+  /** 日常活动及状态 */
+  DailyActivityAndStatus = 4,
 }
 ```
 
