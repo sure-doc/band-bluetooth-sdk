@@ -3,8 +3,9 @@
   padding: 12px;
 }
 
-.button {
+.button.button {
   margin-bottom: 12px;
+  width: 100%;
 }
 
 .device-list-container {

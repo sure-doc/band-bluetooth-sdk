@@ -18,6 +18,12 @@
   - 数据
     - [开启数据同步-startDataSync](#开启数据同步-startDataSync)
     - [监听数据同步-onUploadData](#监听数据同步-onUploadData)
+  - [发送请求-requestDevice](#发送请求-requestDevice)
+    - [获取设备信息-requestType=GetDeviceInfo](#获取设备信息-requestType=GetDeviceInfo)
+    - [获取心率配置-requestType=GetHrSetting](#设置心率配置-requestType=GetHrSetting)
+    - [设置心率配置-requestType=SetHrSetting](#设置心率配置-requestType=SetHrSetting)
+    - [获取血氧配置-requestType=GetBloodOxygenSetting](#设置心率配置-requestType=GetBloodOxygenSetting)
+    - [设置血氧配置-requestType=SetBloodOxygenSetting](#设置心率配置-requestType=SetBloodOxygenSetting)
   - 其他
     - [解析二维码-parseQrcode](#解析二维码-parseQrcode)
 
@@ -71,7 +77,7 @@ import { scanDevice } from 'band-bluetooth-sdk';
 
 const stopScanDevice = scanDevice({
   /** 搜索指定 mac，默认空，扫描所有设备 */
-  mac: 'xxxx',
+  mac: 'AAAAAAAAAAAA',
   /** 是否扫描到首个设备则停止扫描，默认 false */
   first: true,
   /** 超时时间 ms, 默认不超时 */
@@ -102,7 +108,7 @@ import { connectDevice } from 'band-bluetooth-sdk';
 
 connectDevice({
   /** 搜索指定 mac，默认空，扫描所有设备 */
-  mac: 'xxxx',
+  mac: 'AAAAAAAAAAAA',
   /** 超时时间 ms, 默认 10 秒 */
   timeout: 10 * 1000;
 });
@@ -124,7 +130,7 @@ import { disconnectDevice } from 'band-bluetooth-sdk';
 
 disconnectDevice({
   /** 设备 mac */
-  mac: 'xxxx',
+  mac: 'AAAAAAAAAAAA',
 });
 ```
 
@@ -143,7 +149,7 @@ import { disconnectDevice } from 'band-bluetooth-sdk';
 
 disconnectDevice({
   /** 设备 mac */
-  mac: 'xxxx',
+  mac: 'AAAAAAAAAAAA',
 });
 ```
 
@@ -154,7 +160,7 @@ import { onConnectionStateChange } from 'band-bluetooth-sdk';
 
 onConnectionStateChange({
   /** 监听指定 mac 设备变更，可选 */
-  mac: 'xxxx',
+  mac: 'AAAAAAAAAAAA',
   /** 变更回调 */
   onChange: (result) => {
     // 设备 mac
@@ -177,7 +183,7 @@ import { bindDevice } from 'band-bluetooth-sdk';
 
 try {
   const resp = await bindDevice({
-    mac: '',
+    mac: 'AAAAAAAAAAAA',
     // 监听状态变更
     onStateChange: ({ state }) => {
       console.info('onStateChange', state);
@@ -232,7 +238,7 @@ export enum ErrorCode {
 import { connectAndBindDevice } from 'band-bluetooth-sdk';
 
 connectAndBindDevice({
-  mac: 'xxx',
+  mac: 'AAAAAAAAAAAA',
   // ...参数与 bindDevice 一致
 });
 ```
@@ -244,7 +250,7 @@ import { startDataSync } from 'band-bluetooth-sdk';
 
 onConnectionStateChange({
   /** 设备 mac */
-  mac: 'xxxx',
+  mac: 'AAAAAAAAAAAA',
   /**
    * 用户信息，可选
    */
@@ -316,6 +322,128 @@ interface FileData {
   fileHeader?: FileHeader;
   /** 文件列表 */
   fileList: any[];
+}
+```
+
+## 发送请求-requestDevice
+
+`requestDevice` 需要在执行完 [startDataSync](#开启数据同步-startDataSync) 之后执行
+
+### 获取设备信息-requestType=GetDeviceInfo
+
+```js
+import { requestDevice } from 'band-bluetooth-sdk';
+
+const resp = await requestDevice({
+  mac: 'AAAAAAAAAAAA',
+  requestType: 'GetDeviceInfo',
+});
+```
+
+### 获取心率配置-requestType=GetHrSetting
+
+```js
+import { requestDevice } from 'band-bluetooth-sdk';
+
+const resp = await requestDevice({
+  mac: 'AAAAAAAAAAAA',
+  requestType: 'GetHrSetting',
+});
+```
+
+### 设置心率配置-requestType=SetHrSetting
+
+```js
+import { requestDevice } from 'band-bluetooth-sdk';
+
+const resp = await requestDevice({
+  mac: 'AAAAAAAAAAAA',
+  requestType: 'SetHrSetting',
+  // 查看下方 HrSetting
+  data: {
+    ...
+  },
+});
+```
+
+```ts
+/** 心率开关 */
+enum HrSettingSwitch {
+  Invalid = 0,
+  Closed = 1,
+  Opened = 2,
+}
+
+/**
+ * 心率相关设置
+ */
+interface HrSetting {
+  /** 手环日常心率检测开关 - HrSwitch */
+  hrSwitch: HrSettingSwitch;
+  /** 手环日常心率周期检测间隔（单位：s） - HrInterval */
+  hrInterval: number;
+
+  /** 日常最大心率预警开关 - HrDailyWarnEn */
+  hrDailyWarnSwitch: HrSettingSwitch;
+  /** 日常最大心率预警值 - HrDailyWarnVal */
+  hrDailyWarnValue: number;
+
+  /** 运动最大心率预警开关 - HrSportWarnEn */
+  hrSportWarnSwitch: HrSettingSwitch;
+  /** 运动最大心率预警值 - HrSportWarnVal */
+  hrSportWarnValue: number;
+}
+```
+
+### 获取血氧配置-requestType=GetBloodOxygenSetting
+
+```js
+import { requestDevice } from 'band-bluetooth-sdk';
+
+const resp = await requestDevice({
+  mac: 'AAAAAAAAAAAA',
+  requestType: 'GetBloodOxygenSetting',
+});
+```
+
+### 设置血氧配置-requestType=SetBloodOxygenSetting
+
+```js
+import { requestDevice } from 'band-bluetooth-sdk';
+
+const resp = await requestDevice({
+  mac: 'AAAAAAAAAAAA',
+  requestType: 'SetBloodOxygenSetting',
+  // 查看下方 BloodOxygenSetting
+  data: {
+    // ...
+  },
+});
+```
+
+```ts
+/**
+ * 手环血氧检测类型：
+ * 0：睡眠血氧
+ * 1：全天血氧 (暂不支持)
+ */
+enum BloodOxygenSettingType {
+  /** 睡眠血氧 */
+  SleepBloodOxygen = 0,
+  /** 全天血氧 */
+  AllDayBloodOxygen = 1,
+}
+
+/**
+ * 血氧相关配置
+ */
+interface BloodOxygenSetting {
+  /** 手环血氧检测类型 */
+  type: BloodOxygenSettingType;
+  /** 手环血氧检测类型开关 */
+  switch: boolean;
+  /** 手环血氧周期检测间隔（单位s） */
+  interval: number;
 }
 ```
 

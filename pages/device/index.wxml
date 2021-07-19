@@ -3,5 +3,10 @@
   <view>
     <button class="button" bindtap="bindDevice">请求绑定</button>
     <button class="button" bindtap="startSync">启动同步</button>
+    <button class="button" bindtap="getDeviceInfo">获取设备信息</button>
+    <button class="button" bindtap="getHrSetting">获取心率配置</button>
+    <button class="button" bindtap="setHrSetting">设置心率配置</button>
+    <button class="button" bindtap="getBloodOxygenSetting">获取血氧配置</button>
+    <button class="button" bindtap="setBloodOxygenSetting">设置血氧配置</button>
   </view>
 </view>

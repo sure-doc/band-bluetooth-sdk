@@ -35,13 +35,14 @@ Page({
     });
   },
 
-  /** 查看本次连接的设备 */
-  LookConnectDevice() {
+  /** 查看当前连接的设备 */
+  getConnectedDevice() {
     wx.navigateTo({
       url: '/pages/device/connectDevices/index',
     });
   },
-  LookMobileConnectDevice() {
+  /** 查看已连接/已配对设备 */
+  getMobileConnectDevice() {
     wx.navigateTo({
       url: '/pages/device/mobileConnectDevices/index',
     });

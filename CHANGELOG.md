@@ -1,3 +1,20 @@
+## [2021.07.19]
+
+### Added
+
+- 获取设备信息
+- 获取/设置心率配置
+- 获取/设置血氧配置
+
+### Changed
+
+- 更新 band-bluetooth-sdk 到 0.0.1-alpha.15  
+  注意：
+  `GetBloodOxygenOSetting` 错别字，更正为 `GetBloodOxygenSetting`  
+  `SetBloodOxygenOSetting` 错别字，更正为 `SetBloodOxygenSetting`
+
+---
+
 ## [2021.07.12]
 
 ### Added
