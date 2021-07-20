@@ -1,3 +1,16 @@
+## [2021.07.20]
+
+### Added
+
+- 获取运动记录集合
+- 获取运动记录详情
+- 新增 [`band-bluetooth-sdk` 更新日志](docs/VERSIONS.md)
+
+### Changed
+
+- 更新 `band-bluetooth-sdk` 到 `0.0.1-alpha.18`  
+  注意：`0.0.1-alpha.16` 版本存在不兼容变更，请查看 [`band-bluetooth-sdk` 更新日志](docs/VERSIONS.md)
+
 ## [2021.07.19]
 
 ### Added
