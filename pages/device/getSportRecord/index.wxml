@@ -1,0 +1,6 @@
+<view>
+  <view class="item" wx:for="{{sportIds}}" wx:key="*this">
+    {{item}}
+    <button size="mini" data-sport-id="{{item}}" bindtap="getSportDetail">获取详情</button>
+  </view>
+</view>

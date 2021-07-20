@@ -1,0 +1,8 @@
+page {
+  box-sizing: border-box;
+  padding: 20px;
+}
+
+.item {
+  border-bottom: 1px solid #999;
+}

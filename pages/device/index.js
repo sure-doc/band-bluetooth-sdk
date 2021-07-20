@@ -190,4 +190,11 @@ Page({
       url: `getDailyRecord/index?mac=${this.mac}`,
     });
   },
+
+  /** 获取运动记录 */
+  getSportRecord() {
+    wx.navigateTo({
+      url: `getSportRecord/index?mac=${this.mac}`,
+    });
+  },
 });

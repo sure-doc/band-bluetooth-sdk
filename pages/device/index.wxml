@@ -9,5 +9,6 @@
     <button class="button" bindtap="getBloodOxygenSetting">获取血氧配置</button>
     <button class="button" bindtap="setBloodOxygenSetting">设置血氧配置</button>
     <button class="button" bindtap="getDailyRecordData">获取日常数据记录</button>
+    <button class="button" bindtap="getSportRecord">获取运动记录</button>
   </view>
 </view>

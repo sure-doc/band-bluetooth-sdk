@@ -9,7 +9,8 @@
     "pages/device/connectDevices/index",
     "pages/device/scanDevices/index",
     "pages/device/mobileConnectDevices/index",
-    "pages/device/getDailyRecord/index"
+    "pages/device/getDailyRecord/index",
+    "pages/device/getSportRecord/index"
   ],
   "window": {
     "backgroundTextStyle": "light",

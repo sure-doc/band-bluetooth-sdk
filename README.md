@@ -1,5 +1,8 @@
-- 安装
+- [安装](#安装)
+- [`band-bluetooth-sdk` 更新日志](docs/VERSIONS.md)
+- [demo 更新日志](CHANGELOG.md)
 - Api
+
   - 初始化
     - [初始化-init](#初始化-init)
     - [监听初始化完成-onInitialized](#监听初始化完成-onInitialized)
@@ -19,6 +22,7 @@
     - [开启数据同步-startDataSync](#开启数据同步-startDataSync)
     - [监听数据同步-onUploadData](#监听数据同步-onUploadData)
   - [发送请求-requestDevice](#发送请求-requestDevice)
+
     - [发送请求-说明](#发送请求-说明)
     - [发送请求-错误码](#发送请求-错误码)
     - [获取设备信息-requestType=GetDeviceInfo](#获取设备信息-requestType=GetDeviceInfo)
@@ -26,7 +30,9 @@
     - [设置心率配置-requestType=SetHrSetting](#设置心率配置-requestType=SetHrSetting)
     - [获取血氧配置-requestType=GetBloodOxygenSetting](#设置心率配置-requestType=GetBloodOxygenSetting)
     - [设置血氧配置-requestType=SetBloodOxygenSetting](#设置心率配置-requestType=SetBloodOxygenSetting)
-    - [获取日常记录数据-requestType=GetDailyRecordData](#获取日常记录数据-requestType=GetDailyRecordData)
+    - [获取运动记录集合-requestType=GetSportRecordList](#获取运动记录集合-requestType=GetSportRecordList)
+    - [获取运动记录详情-requestType=GetSportRecordFile](#获取运动记录详情-requestType=GetSportRecordFile)
+
   - 其他
     - [解析二维码-parseQrcode](#解析二维码-parseQrcode)
 
@@ -474,7 +480,7 @@ interface BloodOxygenSetting {
 ```js
 import { requestDevice } from 'band-bluetooth-sdk';
 
-const resp = await bandBluetoothSdk.requestDevice({
+const resp = await requestDevice({
   mac: this.mac,
   requestType: 'GetDailyRecordData',
   data: {
@@ -504,6 +510,41 @@ enum DataType {
   /** 日常活动及状态 */
   DailyActivityAndStatus = 4,
 }
+```
+
+### 获取运动记录集合-requestType=GetSportRecordList
+
+```js
+import { requestDevice } from 'band-bluetooth-sdk';
+
+const resp = await requestDevice({
+  mac: this.mac,
+  requestType: 'GetSportRecordList',
+  data: {
+    /** 开始时间戳 ms */
+    startTime: new Date().getTime() - 60 * 60 * 1000,
+    /** 结束时间戳 ms */
+    endTime: new Date().getTime(),
+  },
+});
+
+// 返回运动记录 id 集合
+console.info(resp.sportIds);
+```
+
+### 获取运动记录详情-requestType=GetSportRecordFile
+
+```js
+import { requestDevice } from 'band-bluetooth-sdk';
+
+const resp = await requestDevice({
+  mac: this.mac,
+  requestType: 'GetSportRecordFile',
+  data: {
+    /** 通过 GetSportRecordList 获取到的运动记录 id */
+    sportId: 'xxxxxxxxxxxx',
+  },
+});
 ```
 
 ### 解析二维码-parseQrcode
