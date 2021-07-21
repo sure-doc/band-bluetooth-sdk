@@ -1,3 +1,14 @@
+## [0.0.1-alpha.19]
+
+### Added
+
+- 解析点测血氧
+
+### Improved
+
+- connectDevice 安卓连接设备，内部查找设备逻辑优化
+- connectDevice 优化发生异常是错误信息
+
 ## [0.0.1-alpha.18]
 
 ### Added
