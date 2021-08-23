@@ -1,11 +1,17 @@
 <view class="connectDevices">
-
   <view wx:for="{{mobileConnectedDevices}}" wx:key="item">
-    <view>
-      {{item.mac}}
-    </view>
-      
+    <view>{{item.mac}}</view>
+    <!-- 未连接 -->
+    <button wx:if="{{!item.state.connecting && !item.state.connected}}" size="mini" data-device="{{item}}" bindtap="connectDevice">
+      连接
+    </button>
+    <!-- 连接中 -->
+    <button wx:if="{{item.state.connecting && !item.state.connected}}" loading="{{true}}" size="mini" disabled="{{true}}">
+      连接中
+    </button>
+    <!-- 已连接 -->
+    <button wx:if="{{!item.state.connecting && item.state.connected}}" size="mini" disabled="{{true}}">
+      已连接
+    </button>
   </view>
-    
 </view>
-  
