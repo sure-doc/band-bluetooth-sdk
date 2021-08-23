@@ -1,3 +1,10 @@
+## [2021.08.23]
+
+### Added
+
+- 更新 `band-bluetooth-sdk` 到 `0.0.1-alpha.20`   
+- 新增 `获取设备连接状态-getConnectionState` 说明文档
+
 ## [2021.07.20]
 
 ### Added
