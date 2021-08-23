@@ -12,6 +12,7 @@
   - 连接
     - [连接设备-connectDevice](#连接设备-connectDevice)
     - [断开连接-disconnectDevice](#断开连接-disconnectDevice)
+    - [获取设备连接状态-getConnectionState](#获取设备连接状态-getConnectionState)
     - [监听设备连接状态变更-onConnectionStateChange](#监听设备连接状态变更-onConnectionStateChange)
     - [获取已连接设备信息-getConnectedDevices](#获取已连接设备信息-getConnectedDevices)
     - [获取手机已连接设备信息-getMobileDeviceMac](#获取手机已连接设备信息-getMobileDeviceMac)
@@ -141,6 +142,19 @@ disconnectDevice({
   /** 设备 mac */
   mac: 'AAAAAAAAAAAA',
 });
+```
+
+### 获取设备连接状态-getConnectionState
+
+```js
+import { getConnectionState } from 'band-bluetooth-sdk';
+
+const state = getConnectionState({
+  /** 设备 mac */
+  mac: 'AAAAAAAAAAAA',
+});
+
+console.info(state); // { connected: false, connecting: false }
 ```
 
 ### 获取手机已连接设备信息-getMobileDeviceMac
