@@ -5,7 +5,7 @@
     <button class="button" bindtap="scanDevice">扫描设备</button>
     <button class="button" bindtap="LookScanDevice">查看扫描到的设备</button>
     <button class="button" bindtap="getConnectedDevice">查看当前连接设备</button>
-    <button class="button" bindtap="getMobileConnectDevice">查看已连接/已配对设备</button>
+    <button class="button" bindtap="getMobileConnectDevice">查看手机已连接/已配对设备</button>
   </view>
   <!-- 已连接设备列表 -->
   <view class="device-list-container">

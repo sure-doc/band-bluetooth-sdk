@@ -1,11 +1,8 @@
 <view wx:for="{{scanDevices}}" wx:key="mac">
   <view class="device_item">
     <view>mac: {{item.mac}}</view>
-  <view>name: {{item.name}}</view>
-  <view>localName: {{item.localName}}</view>
-  <view>RSSI: {{item.RSSI}}</view>
+    <view>name: {{item.name}}</view>
+    <view>localName: {{item.localName}}</view>
+    <view>RSSI: {{item.RSSI}}</view>
   </view>
-    
-    
 </view>
-  
