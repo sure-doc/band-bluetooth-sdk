@@ -16,9 +16,10 @@
     - [监听设备连接状态变更-onConnectionStateChange](#监听设备连接状态变更-onConnectionStateChange)
     - [获取已连接设备信息-getConnectedDevices](#获取已连接设备信息-getConnectedDevices)
     - [获取手机已连接设备信息-getMobileDeviceMac](#获取手机已连接设备信息-getMobileDeviceMac)
-  - 绑定
+  - 绑定/解绑
     - [请求绑定-bindDevice](#请求绑定-bindDevice)
     - [连接并请求绑定-connectAndBindDevice](#连接并请求绑定-connectAndBindDevice)
+    - [解除绑定-unbindDevice](#解除绑定-unbindDevice)
   - 数据
     - [开启数据同步-startDataSync](#开启数据同步-startDataSync)
     - [监听数据同步-onUploadData](#监听数据同步-onUploadData)
@@ -263,6 +264,17 @@ import { connectAndBindDevice } from 'band-bluetooth-sdk';
 connectAndBindDevice({
   mac: 'AAAAAAAAAAAA',
   // ...参数与 bindDevice 一致
+});
+```
+
+### 解除绑定-unbindDevice
+
+```js
+import { unbindDevice } from 'band-bluetooth-sdk';
+
+unbindDevice({
+  mac: 'AAAAAAAAAAAA',
+  bindUserId: 'xxxx',
 });
 ```
 
