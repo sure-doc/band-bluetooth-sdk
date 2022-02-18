@@ -11,10 +11,15 @@ Page({
   async onLoad({ mac }) {
     this.mac = mac;
     console.info(`请求绑定 mac=${mac}`);
+
+    this.setData({
+      error: undefined,
+    });
     let resp;
     try {
       resp = await bandBluetoothSdk.bindDevice({
         mac,
+        userId: 'userId',
         // 监听状态变更
         onStateChange: ({ state }) => {
           console.info('onStateChange', state);
@@ -25,12 +30,6 @@ Page({
           await new Promise((resolve) => {
             setTimeout(resolve, 300);
           });
-
-          // 如果失败则返回：
-          // return {
-          //   success: false,
-          //   errorMsg: '绑定失败了',
-          // };
 
           return {
             success: true,

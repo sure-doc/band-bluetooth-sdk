@@ -4,29 +4,41 @@
 - Api
 
   - 初始化
+
     - [初始化-init](#初始化-init)
     - [监听初始化完成-onInitialized](#监听初始化完成-onInitialized)
+
   - 扫描设备
+
     - [扫描设备-scanDevice](#扫描设备-scandevice)
     - [获取扫描到的设备信息-getScanDevices](#获取扫描到的设备信息-getScanDevices)
+
   - 连接
+
     - [连接设备-connectDevice](#连接设备-connectDevice)
     - [断开连接-disconnectDevice](#断开连接-disconnectDevice)
     - [获取设备连接状态-getConnectionState](#获取设备连接状态-getConnectionState)
     - [监听设备连接状态变更-onConnectionStateChange](#监听设备连接状态变更-onConnectionStateChange)
     - [获取已连接设备信息-getConnectedDevices](#获取已连接设备信息-getConnectedDevices)
     - [获取手机已连接设备信息-getMobileDeviceMac](#获取手机已连接设备信息-getMobileDeviceMac)
+
   - 绑定/解绑
+
     - [请求绑定-bindDevice](#请求绑定-bindDevice)
     - [连接并请求绑定-connectAndBindDevice](#连接并请求绑定-connectAndBindDevice)
     - [解除绑定-unbindDevice](#解除绑定-unbindDevice)
+
   - 数据
+
     - [开启数据同步-startDataSync](#开启数据同步-startDataSync)
     - [监听数据同步-onUploadData](#监听数据同步-onUploadData)
+
   - [发送请求-requestDevice](#发送请求-requestDevice)
 
     - [发送请求-说明](#发送请求-说明)
     - [发送请求-错误码](#发送请求-错误码)
+
+    - [获取绑定信息-requestType=GetBindInfo](#获取绑定信息-requestType=GetBindInfo)
     - [获取设备信息-requestType=GetDeviceInfo](#获取设备信息-requestType=GetDeviceInfo)
     - [获取心率配置-requestType=GetHrSetting](#设置心率配置-requestType=GetHrSetting)
     - [设置心率配置-requestType=SetHrSetting](#设置心率配置-requestType=SetHrSetting)
@@ -208,6 +220,8 @@ import { bindDevice } from 'band-bluetooth-sdk';
 try {
   const resp = await bindDevice({
     mac: 'AAAAAAAAAAAA',
+    // 绑定账号，解绑时传的 `bindUserId` 需要与绑定时传的 `userId` 一致
+    userId: 'xxxx',
     // 监听状态变更
     onStateChange: ({ state }) => {
       console.info('onStateChange', state);
@@ -272,8 +286,11 @@ connectAndBindDevice({
 ```js
 import { unbindDevice } from 'band-bluetooth-sdk';
 
+- 注意：需要先调用 `开启数据同步-startDataSync`
+
 unbindDevice({
   mac: 'AAAAAAAAAAAA',
+  // 需要与绑定时传的 `userId` 一致
   bindUserId: 'xxxx',
 });
 ```
@@ -382,6 +399,17 @@ interface FileData {
 1000011 当前状态不支持该指令  
 1003001 手机未打开定位服务  
 1003002 手机无定位权限
+
+### 获取绑定信息-requestType=GetBindInfo
+
+```js
+import { requestDevice } from 'band-bluetooth-sdk';
+
+const resp = await bandBluetoothSdk.requestDevice({
+  mac: this.mac,
+  requestType: 'GetBindInfo',
+});
+```
 
 ### 获取设备信息-requestType=GetDeviceInfo
 

@@ -1,3 +1,11 @@
+## [2022.02.18]
+
+### Changed
+
+- 完善 `bindDevice`,`unbindDevice` 文档, 解绑时传的 `bindUserId` 需要与绑定时传的 `userId` 一致
+
+- 新增 `unbindDevice`, `getBindInfo` 示例
+
 ## [2022.02.17]
 
 ### Changed

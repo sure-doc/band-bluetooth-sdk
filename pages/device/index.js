@@ -14,6 +14,32 @@ Page({
       url: `bind/index?mac=${this.mac}`,
     });
   },
+  /** 绑定设备 */
+  async unbindDevice() {
+    try {
+      console.info(`请求 解除绑定 mac=${this.mac} 开始`);
+      wx.showLoading({ title: '正在请求 解除绑定', mask: true });
+
+      const resp = await bandBluetoothSdk.unbindDevice({
+        mac: this.mac,
+        bindUserId: 'userId',
+      });
+
+      console.info(`请求 解除绑定 mac=${this.mac} 结果: `, resp);
+      wx.hideLoading();
+      wx.showModal({
+        title: '请求 解除绑定 成功',
+        showCancel: false,
+        success: (res) => {
+          wx.navigateBack();
+        },
+      });
+    } catch (error) {
+      console.error(`请求 解除绑定 mac=${this.mac} 发生异常: `, error);
+      wx.hideLoading();
+      wx.showToast({ title: '请求 解除绑定 失败', icon: 'error' });
+    }
+  },
 
   /** 开启同步 */
   async startSync() {
@@ -30,6 +56,31 @@ Page({
       console.error(`开启同步 mac=${this.mac} 发生异常: `, error);
       wx.hideLoading();
       wx.showToast({ title: '开启同步 失败', icon: 'error' });
+    }
+  },
+
+  /** 获取绑定状态 */
+  async getBindInfo() {
+    try {
+      console.info(`获取 绑定状态 mac=${this.mac} 开始`);
+      wx.showLoading({ title: '正在获取 绑定状态', mask: true });
+
+      const resp = await bandBluetoothSdk.requestDevice({
+        mac: this.mac,
+        requestType: 'GetBindInfo',
+      });
+
+      console.info(`获取 绑定状态 mac=${this.mac} 结果: `, resp);
+      wx.hideLoading();
+      wx.showModal({
+        title: '获取 绑定状态 结果',
+        content: JSON.stringify(resp, undefined, 2),
+        showCancel: false,
+      });
+    } catch (error) {
+      console.error(`获取 绑定状态 mac=${this.mac} 发生异常: `, error);
+      wx.hideLoading();
+      wx.showToast({ title: '获取 绑定状态 失败', icon: 'error' });
     }
   },
 
