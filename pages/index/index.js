@@ -47,8 +47,9 @@ Page({
       url: '/pages/device/mobileConnectDevices/index',
     });
   },
+
   /** 查看当前已扫描到的设备 */
-  LookScanDevice() {
+  getScanDevice() {
     wx.navigateTo({
       url: '/pages/device/scanDevices/index',
     });
