@@ -4,51 +4,38 @@
 - Api
 
   - 初始化
-
     - [初始化-init](#初始化-init)
-    - [监听初始化完成-onInitialized](#监听初始化完成-onInitialized)
-
+    - [监听初始化完成-onInitialized](#监听初始化完成-oninitialized)
   - 扫描设备
-
     - [扫描设备-scanDevice](#扫描设备-scandevice)
-    - [获取扫描到的设备信息-getScanDevices](#获取扫描到的设备信息-getScanDevices)
-
+    - [获取扫描到的设备信息-getScanDevices](#获取扫描到的设备信息-getscandevices)
   - 连接
-
-    - [连接设备-connectDevice](#连接设备-connectDevice)
-    - [断开连接-disconnectDevice](#断开连接-disconnectDevice)
-    - [获取设备连接状态-getConnectionState](#获取设备连接状态-getConnectionState)
-    - [监听设备连接状态变更-onConnectionStateChange](#监听设备连接状态变更-onConnectionStateChange)
-    - [获取已连接设备信息-getConnectedDevices](#获取已连接设备信息-getConnectedDevices)
-    - [获取手机已连接设备信息-getMobileDeviceMac](#获取手机已连接设备信息-getMobileDeviceMac)
-
+    - [连接设备-connectDevice](#连接设备-connectdevice)
+    - [断开连接-disconnectDevice](#断开连接-disconnectdevice)
+    - [获取设备连接状态-getConnectionState](#获取设备连接状态-getconnectionstate)
+    - [监听设备连接状态变更-onConnectionStateChange](#监听设备连接状态变更-onconnectionstatechange)
+    - [获取已连接设备信息-getConnectedDevices](#获取已连接设备信息-getconnecteddevices)
+    - [获取手机已连接设备信息-getMobileDeviceMac](#获取手机已连接设备信息-getmobiledevicemac)
   - 绑定/解绑
-
-    - [请求绑定-bindDevice](#请求绑定-bindDevice)
-    - [连接并请求绑定-connectAndBindDevice](#连接并请求绑定-connectAndBindDevice)
-    - [解除绑定-unbindDevice](#解除绑定-unbindDevice)
-
+    - [请求绑定-bindDevice](#请求绑定-binddevice)
+    - [连接并请求绑定-connectAndBindDevice](#连接并请求绑定-connectandbinddevice)
+    - [解除绑定-unbindDevice](#解除绑定-unbinddevice)
   - 数据
-
-    - [开启数据同步-startDataSync](#开启数据同步-startDataSync)
-    - [监听数据同步-onUploadData](#监听数据同步-onUploadData)
-
-  - [发送请求-requestDevice](#发送请求-requestDevice)
-
+    - [开启数据同步-startDataSync](#开启数据同步-startdatasync)
+    - [监听数据同步-onUploadData](#监听数据同步-onuploaddata)
+  - [发送请求-requestDevice](#发送请求-requestdevice)
     - [发送请求-说明](#发送请求-说明)
     - [发送请求-错误码](#发送请求-错误码)
-
-    - [获取绑定信息-requestType=GetBindInfo](#获取绑定信息-requestType=GetBindInfo)
-    - [获取设备信息-requestType=GetDeviceInfo](#获取设备信息-requestType=GetDeviceInfo)
-    - [获取心率配置-requestType=GetHrSetting](#设置心率配置-requestType=GetHrSetting)
-    - [设置心率配置-requestType=SetHrSetting](#设置心率配置-requestType=SetHrSetting)
-    - [获取血氧配置-requestType=GetBloodOxygenSetting](#设置心率配置-requestType=GetBloodOxygenSetting)
-    - [设置血氧配置-requestType=SetBloodOxygenSetting](#设置心率配置-requestType=SetBloodOxygenSetting)
-    - [获取运动记录集合-requestType=GetSportRecordList](#获取运动记录集合-requestType=GetSportRecordList)
-    - [获取运动记录详情-requestType=GetSportRecordFile](#获取运动记录详情-requestType=GetSportRecordFile)
-
+    - [获取绑定信息-requestType=GetBindInfo](#获取绑定信息-requesttypegetbindinfo)
+    - [获取设备信息-requestType=GetDeviceInfo](#获取设备信息-requesttypegetdeviceinfo)
+    - [获取心率配置-requestType=GetHrSetting](#获取心率配置-requesttypegethrsetting)
+    - [设置心率配置-requestType=SetHrSetting](#设置心率配置-requesttypesethrsetting)
+    - [获取血氧配置-requestType=GetBloodOxygenSetting](#获取血氧配置-requesttypegetbloodoxygensetting)
+    - [设置血氧配置-requestType=SetBloodOxygenSetting](#设置血氧配置-requesttypesetbloodoxygensetting)
+    - [获取运动记录集合-requestType=GetSportRecordList](#获取运动记录集合-requesttypegetsportrecordlist)
+    - [获取运动记录详情-requestType=GetSportRecordFile](#获取运动记录详情-requesttypegetsportrecordfile)
   - 其他
-    - [解析二维码-parseQrcode](#解析二维码-parseQrcode)
+    - [解析二维码-parseQrcode](#解析二维码-parseqrcode)
 
 ---
 
@@ -209,8 +196,6 @@ onConnectionStateChange({
 });
 
 ```
-
----
 
 ### 请求绑定-bindDevice
 
