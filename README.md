@@ -387,14 +387,32 @@ interface FileData {
 
 ### 获取绑定信息-requestType=GetBindInfo
 
-```js
+````js
 import { requestDevice } from 'band-bluetooth-sdk';
 
 const resp = await bandBluetoothSdk.requestDevice({
   mac: this.mac,
   requestType: 'GetBindInfo',
 });
-```
+
+/**
+ * 
+ * ``` 
+ * resp: {
+ *   /** 是否被绑定 **/
+ *   isBond?: boolean
+ *   /** 绑定时间戳，单位秒 **/
+ *   timestamp?: number
+ *   /** 传入的 userId **/
+ *   account?: string
+ *   /** 6个字节设备mac地址 **/
+ *   mac: string
+ *   /** 6个字节被绑手机mac地址 **/
+ *   masterMac: string
+ * }
+ * ```
+ */
+````
 
 ### 获取设备信息-requestType=GetDeviceInfo
 
