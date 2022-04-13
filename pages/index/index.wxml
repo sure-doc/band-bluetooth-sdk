@@ -2,8 +2,8 @@
 <view class="container">
   <view>
     <button class="button" bindtap="scanQrcodeBind">扫码绑定</button>
-    <button class="button" bindtap="scanDevice">扫描设备</button>
-    <button class="button" bindtap="getScanDevice">查看所有曾扫描过的设备</button>
+    <button class="button" bindtap="scanDevice">蓝牙扫描设备</button>
+    <button class="button" bindtap="getScanDevice">查看所有蓝牙曾扫描过的设备</button>
     <button class="button" bindtap="getConnectedDevice">查看当前连接设备</button>
     <button class="button" bindtap="getMobileConnectDevice">查看手机已连接/已配对设备</button>
   </view>

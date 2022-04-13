@@ -61,8 +61,32 @@ import { init } from 'band-bluetooth-sdk';
 init({
   // 可选
   logger: {
+    /**
+     * trace/debug/info/warn/error
+     **/
     level: 'debug', // 默认 warn
-    method: ({ methodName, loggerName, logLevel, loggingMethod }, ...msgs) => {
+    method: (
+      {
+        /** trace/debug/info/warn/error */
+        methodName,
+        /**
+         * TRACE: 0;
+         * DEBUG: 1;
+         * INFO: 2;
+         * WARN: 3;
+         * ERROR: 4;
+         * SILENT: 5;
+         */
+        logLevel,
+        /** 内部调用 logger 的名称 */
+        loggerName,
+        /** 内置的输出日志方法 */
+        loggingMethod,
+      },
+      ...msgs
+    ) => {
+      console[methodName](`${loggerName}-${logLevel}`, ...msgs);
+      // 或者
       loggingMethod(`${methodName}-${loggerName}-${logLevel}`, ...msgs);
     },
   },
@@ -396,8 +420,8 @@ const resp = await bandBluetoothSdk.requestDevice({
 });
 
 /**
- * 
- * ``` 
+ *
+ * ```
  * resp: {
  *   /** 是否被绑定 **/
  *   isBond?: boolean

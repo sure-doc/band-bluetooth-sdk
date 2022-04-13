@@ -48,3 +48,6 @@ storybook-static
 .history/
 .vscode/
 /miniprogram_npm
+
+# 
+project.private.config.json
