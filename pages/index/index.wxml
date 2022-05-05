@@ -6,6 +6,10 @@
     <button class="button" bindtap="getScanDevice">查看所有蓝牙曾扫描过的设备</button>
     <button class="button" bindtap="getConnectedDevice">查看当前连接设备</button>
     <button class="button" bindtap="getMobileConnectDevice">查看手机已连接/已配对设备</button>
+    <button class="button" bindtap="openAppAuthorizeSetting">跳转系统微信授权管理页</button>
+    <button class="button" bindtap="openSystemBluetoothSetting">跳转系统蓝牙设置页</button>
+    <button class="button" bindtap="checkBluetooth">检查蓝牙</button>
+    <button class="button" bindtap="getLocation">获取定位</button>
   </view>
   <!-- 已连接设备列表 -->
   <view class="device-list-container">

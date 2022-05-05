@@ -71,6 +71,74 @@ Page({
     });
   },
 
+  /** 跳转系统微信授权管理页 */
+  openAppAuthorizeSetting() {
+    wx.openAppAuthorizeSetting();
+  },
+
+  /** 跳转系统蓝牙设置页 */
+  openSystemBluetoothSetting() {
+    wx.openSystemBluetoothSetting();
+  },
+
+  /** 检查蓝牙 */
+  async checkBluetooth() {
+    if (wx.getSetting) {
+      const setting = await new Promise((resolve) => {
+        wx.getSetting({ success: resolve });
+      });
+
+      const { authSetting } = setting;
+
+      console.info('setting', setting);
+
+      if (authSetting['scope.bluetooth'] === false) {
+        wx.showModal({ content: '请允许小程序使用蓝牙', showCancel: false });
+        return;
+      }
+      if (authSetting['scope.userLocation'] === false) {
+        wx.showModal({ content: '请允许小程序使用定位', showCancel: false });
+        return;
+      }
+    }
+
+    if (wx.getAppAuthorizeSetting) {
+      const appAuthorizeSetting = wx.getAppAuthorizeSetting();
+      const { bluetoothAuthorized, locationAuthorized } = appAuthorizeSetting;
+
+      if (bluetoothAuthorized === 'denied') {
+        wx.showModal({ content: '请允许微信使用蓝牙', showCancel: false });
+        return;
+      }
+
+      if (locationAuthorized === 'denied') {
+        wx.showModal({ content: '请允许微信使用定位', showCancel: false });
+        return;
+      }
+    }
+    if (wx.getSystemSetting) {
+      const { bluetoothEnabled, locationEnabled } = wx.getSystemSetting();
+
+      if (!bluetoothEnabled) {
+        wx.showModal({ content: '请打开系统蓝牙', showCancel: false });
+        return;
+      }
+      if (!locationEnabled) {
+        wx.showModal({ content: '请打开系统定位', showCancel: false });
+        return;
+      }
+    }
+  },
+
+  getLocation() {
+    wx.getLocation({
+      type: 'wgs84',
+      success(res) {
+        console.info('res', res);
+      },
+    });
+  },
+
   /** 监听连接状态变更 */
   _listenConnectionStateChange() {
     bandBluetoothSdk.onConnectionStateChange({
