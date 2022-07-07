@@ -34,6 +34,7 @@
     - [设置血氧配置-requestType=SetBloodOxygenSetting](#设置血氧配置-requesttypesetbloodoxygensetting)
     - [获取运动记录集合-requestType=GetSportRecordList](#获取运动记录集合-requesttypegetsportrecordlist)
     - [获取运动记录详情-requestType=GetSportRecordFile](#获取运动记录详情-requesttypegetsportrecordfile)
+  - [ota\_升级-startUpgrade](#ota_升级-startUpgrade)
   - 其他
     - [解析二维码-parseQrcode](#解析二维码-parseqrcode)
 
@@ -626,6 +627,31 @@ const resp = await requestDevice({
     sportId: 'xxxxxxxxxxxx',
   },
 });
+```
+
+### ota\_升级-startUpgrade
+
+```js
+import { startUpgrade } from 'band-bluetooth-sdk';
+
+let cancel;
+
+const startUpgradeRes = await startUpgrade({
+  mac: 'xxxx',
+  otaFile,
+  onStateChange: (state) => {
+    console.info(state);
+  },
+  onUploadFilePercent: (percent) => {
+    console.info(percent);
+  },
+  canceler: (_cancel) => {
+    cancel = _cancel;
+  },
+});
+
+// 取消
+cancel();
 ```
 
 ### 解析二维码-parseQrcode
