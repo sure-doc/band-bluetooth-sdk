@@ -1,3 +1,7 @@
+## [2022.11.28]
+
+- update `band-bluetooth-sdk` to 0.1.1
+
 ## [2022.07.07]
 
 - 完善 `ota升级` 文档
@@ -43,7 +47,7 @@
 
 ### Changed
 
-- 更新 `band-bluetooth-sdk` 到 `0.0.1-alpha.18`  
+- 更新 `band-bluetooth-sdk` 到 `0.0.1-alpha.18`
   注意：`0.0.1-alpha.16` 版本存在不兼容变更，请查看 [`band-bluetooth-sdk` 更新日志](docs/VERSIONS.md)
 
 ## [2021.07.19]
@@ -57,9 +61,9 @@
 
 ### Changed
 
-- 更新 band-bluetooth-sdk 到 0.0.1-alpha.15  
+- 更新 band-bluetooth-sdk 到 0.0.1-alpha.15
   注意：
-  `GetBloodOxygenOSetting` 错别字，更正为 `GetBloodOxygenSetting`  
+  `GetBloodOxygenOSetting` 错别字，更正为 `GetBloodOxygenSetting`
   `SetBloodOxygenOSetting` 错别字，更正为 `SetBloodOxygenSetting`
 
 ---
