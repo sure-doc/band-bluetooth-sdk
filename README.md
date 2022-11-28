@@ -467,7 +467,7 @@ console.info(resp);
 
 GetBatteryInfo 返回值
 
-```json
+```jsonc
 {
   /** 电池电量百分比。取值范围[0,100] */
   "batteryPercent": 100
