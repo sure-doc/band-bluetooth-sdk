@@ -22,12 +22,21 @@ Page({
       wx.navigateBack();
       return;
     }
-    console.info('扫描结果', scanRes);
-    const { mac } = bandBluetoothSdk.parseQrcode(scanRes.result);
 
-    let result;
+    console.info('扫描结果', scanRes);
+    const mac = getMacByScanResult(scanRes.result);
+
+    if (mac?.length !== 12) {
+      this.setData({
+        error: {
+          msg: `无效的二维码: ${scanRes.result}`,
+        },
+      });
+      return;
+    }
+
     try {
-      result = await bandBluetoothSdk.connectAndBindDevice({
+      await bandBluetoothSdk.connectAndBindDevice({
         mac,
         // 监听状态变更
         onStateChange: ({ state }) => {
@@ -72,3 +81,13 @@ Page({
     this.setData(nextData);
   },
 });
+
+// 有一些手环上的二维码内容直接是 mac，这里做一下兼容
+function getMacByScanResult(scanResult) {
+  if (scanResult.length === 12) {
+    return scanResult;
+  }
+  const { mac } = bandBluetoothSdk.parseQrcode(scanResult);
+
+  return mac;
+}
