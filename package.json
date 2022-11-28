@@ -6,6 +6,6 @@
   "author": "suredoc",
   "license": "ISC",
   "dependencies": {
-    "band-bluetooth-sdk": "0.1.0"
+    "band-bluetooth-sdk": "0.1.1"
   }
 }
