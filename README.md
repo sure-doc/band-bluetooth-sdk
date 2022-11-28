@@ -32,6 +32,7 @@
     - [设置心率配置-requestType=SetHrSetting](#设置心率配置-requesttypesethrsetting)
     - [获取血氧配置-requestType=GetBloodOxygenSetting](#获取血氧配置-requesttypegetbloodoxygensetting)
     - [设置血氧配置-requestType=SetBloodOxygenSetting](#设置血氧配置-requesttypesetbloodoxygensetting)
+    - [获取日常记录数据-requestType=GetDailyRecordData](#获取日常记录数据-requestType=GetDailyRecordData)
     - [获取运动记录集合-requestType=GetSportRecordList](#获取运动记录集合-requesttypegetsportrecordlist)
     - [获取运动记录详情-requestType=GetSportRecordFile](#获取运动记录详情-requesttypegetsportrecordfile)
   - [ota\_升级-startUpgrade](#ota_升级-startUpgrade)
@@ -395,19 +396,19 @@ interface FileData {
 
 ### 发送请求-错误码
 
-1000000 成功  
-1000001 未知错误  
-1000002 内存申请失败  
-1000003 错误的参数  
-1000004 不支持的命令  
-1000005 正忙  
-1000006 pb 解码错误  
-1000007 pb 编码错误  
-1000008 传输层错误  
-1000009 未绑定状态，不支持改操作  
-1000010 文件不存在  
-1000011 当前状态不支持该指令  
-1003001 手机未打开定位服务  
+1000000 成功
+1000001 未知错误
+1000002 内存申请失败
+1000003 错误的参数
+1000004 不支持的命令
+1000005 正忙
+1000006 pb 解码错误
+1000007 pb 编码错误
+1000008 传输层错误
+1000009 未绑定状态，不支持改操作
+1000010 文件不存在
+1000011 当前状态不支持该指令
+1003001 手机未打开定位服务
 1003002 手机无定位权限
 
 ### 获取绑定信息-requestType=GetBindInfo
@@ -656,11 +657,13 @@ cancel();
 
 ### 解析二维码-parseQrcode
 
+注意：本函数只是提取 url 中的 m 参数为 mac，s 参数为 sn；不同厂商的二维码格式可能不同，根据实际情况使用。
+
 ```js
 import { parseQrcode } from 'band-bluetooth-sdk';
 
-const qrcode = '.....';
+const qrcode = 'https://www.xxx.com?m=123456&s=abcdefg';
 const qrcodeInfo = parseQrcode(qrcode);
 
-console.info(qrcodeInfo); // { mac: '', sn: '' }
+console.info(qrcodeInfo); // { mac: '123456', sn: 'abcdefg' }
 ```
