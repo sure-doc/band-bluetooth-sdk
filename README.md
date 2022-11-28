@@ -28,11 +28,12 @@
     - [发送请求-错误码](#发送请求-错误码)
     - [获取绑定信息-requestType=GetBindInfo](#获取绑定信息-requesttypegetbindinfo)
     - [获取设备信息-requestType=GetDeviceInfo](#获取设备信息-requesttypegetdeviceinfo)
+    - [获取电量-requestType=GetBatteryInfo](#获取电量-requesttypegetbatteryinfo)
     - [获取心率配置-requestType=GetHrSetting](#获取心率配置-requesttypegethrsetting)
     - [设置心率配置-requestType=SetHrSetting](#设置心率配置-requesttypesethrsetting)
     - [获取血氧配置-requestType=GetBloodOxygenSetting](#获取血氧配置-requesttypegetbloodoxygensetting)
     - [设置血氧配置-requestType=SetBloodOxygenSetting](#设置血氧配置-requesttypesetbloodoxygensetting)
-    - [获取日常记录数据-requestType=GetDailyRecordData](#获取日常记录数据-requestType=GetDailyRecordData)
+    - [获取日常记录数据-requestType=GetDailyRecordData](#获取日常记录数据-requesttypegetdailyrecorddata)
     - [获取运动记录集合-requestType=GetSportRecordList](#获取运动记录集合-requesttypegetsportrecordlist)
     - [获取运动记录详情-requestType=GetSportRecordFile](#获取运动记录详情-requesttypegetsportrecordfile)
   - [ota\_升级-startUpgrade](#ota_升级-startUpgrade)
@@ -396,20 +397,20 @@ interface FileData {
 
 ### 发送请求-错误码
 
-1000000 成功
-1000001 未知错误
-1000002 内存申请失败
-1000003 错误的参数
-1000004 不支持的命令
-1000005 正忙
-1000006 pb 解码错误
-1000007 pb 编码错误
-1000008 传输层错误
-1000009 未绑定状态，不支持改操作
-1000010 文件不存在
-1000011 当前状态不支持该指令
-1003001 手机未打开定位服务
-1003002 手机无定位权限
+1000000 成功<br/>
+1000001 未知错误<br/>
+1000002 内存申请失败<br/>
+1000003 错误的参数<br/>
+1000004 不支持的命令<br/>
+1000005 正忙<br/>
+1000006 pb 解码错误<br/>
+1000007 pb 编码错误<br/>
+1000008 传输层错误<br/>
+1000009 未绑定状态，不支持改操作<br/>
+1000010 文件不存在<br/>
+1000011 当前状态不支持该指令<br/>
+1003001 手机未打开定位服务<br/>
+1003002 手机无定位权限<br/>
 
 ### 获取绑定信息-requestType=GetBindInfo
 
@@ -449,6 +450,28 @@ const resp = await requestDevice({
   mac: 'AAAAAAAAAAAA',
   requestType: 'GetDeviceInfo',
 });
+```
+
+### 获取电量-requestType=GetBatteryInfo
+
+```js
+import { requestDevice } from 'band-bluetooth-sdk';
+
+const resp = await requestDevice({
+  mac: 'AAAAAAAAAAAA',
+  requestType: 'GetDeviceInfo',
+});
+
+console.info(resp);
+```
+
+GetBatteryInfo 返回值
+
+```json
+{
+  /** 电池电量百分比。取值范围[0,100] */
+  "batteryPercent": 100
+}
 ```
 
 ### 获取心率配置-requestType=GetHrSetting
