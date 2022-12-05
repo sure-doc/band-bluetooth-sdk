@@ -42,8 +42,6 @@ Page({
         onDeviceFound: (device) => {
           console.info('扫描到设备', device);
           this._setScanDevice(device);
-          //  获取已扫描到的设备信息
-          bandBluetoothSdk.getScanDevices();
         },
       });
     }
@@ -88,7 +86,10 @@ Page({
     this._setData({
       _scanDeviceMap: {
         ...this.data._scanDeviceMap,
-        [device.mac]: device,
+        [device.mac]: {
+          ...device,
+          foundAt: this.data._scanDeviceMap[device.mac]?.foundAt ?? new Date().getTime(),
+        },
       },
     });
   },
@@ -116,11 +117,15 @@ Page({
 
     const { _scanDeviceMap, _connectionStateMap } = { ...this.data, ...changedData };
 
-    return Object.values(_scanDeviceMap).map((device) => {
-      return {
-        ...device,
-        state: _connectionStateMap[device.mac] ?? InitConnectionState,
-      };
-    });
+    return Object.keys(_scanDeviceMap)
+      .map((key) => {
+        const device = _scanDeviceMap[key];
+        return {
+          ...device,
+          state: _connectionStateMap[device.mac] ?? InitConnectionState,
+        };
+      })
+      // 按扫描到的先后顺序排序
+      .sort((a, b) => a.foundAt - b.foundAt);
   },
 });
